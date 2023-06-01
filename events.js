@@ -37,12 +37,15 @@ Example.events = function() {
     // an example of using composite events on the world
     Events.on(world, 'afterAdd', function(event) {
         // do something with event.object
+        console.log('after add');
     });
 
     var lastTime = Common.now();
 
     // an example of using beforeUpdate event on an engine
-    Events.on(engine, 'beforeUpdate', function(event) {
+    Events.on(engine, 'beforeUpdate', function (event) {
+        console.log('beforeUpdate');
+
         var engine = event.source;
 
         // apply random forces every 5 secs
@@ -61,8 +64,8 @@ Example.events = function() {
         // change object colours to show those starting a collision
         for (var i = 0; i < pairs.length; i++) {
             var pair = pairs[i];
-            pair.bodyA.render.fillStyle = '#333';
-            pair.bodyB.render.fillStyle = '#333';
+            pair.bodyA.render.fillStyle = 'pink';
+            pair.bodyB.render.fillStyle = 'pink';
         }
     });
 
@@ -73,8 +76,8 @@ Example.events = function() {
         // change object colours to show those in an active collision (e.g. resting contact)
         for (var i = 0; i < pairs.length; i++) {
             var pair = pairs[i];
-            pair.bodyA.render.fillStyle = '#333';
-            pair.bodyB.render.fillStyle = '#333';
+            pair.bodyA.render.fillStyle = 'purple';
+            pair.bodyB.render.fillStyle = 'purple';
         }
     });
 
@@ -86,8 +89,8 @@ Example.events = function() {
         for (var i = 0; i < pairs.length; i++) {
             var pair = pairs[i];
 
-            pair.bodyA.render.fillStyle = '#222';
-            pair.bodyB.render.fillStyle = '#222';
+            pair.bodyA.render.fillStyle = 'blue';
+            pair.bodyB.render.fillStyle = 'blue';
         }
     });
 
@@ -107,8 +110,11 @@ Example.events = function() {
     
     Composite.add(world, stack);
 
-    var shakeScene = function(engine) {
+    var shakeScene = function (engine) {
+        // ![](https://www.clzczh.top/CLZ_img/images/202306011849691.png)
+        // ![](https://www.clzczh.top/CLZ_img/images/202306011847594.png)
         var timeScale = (1000 / 60) / engine.timing.lastDelta;
+
         var bodies = Composite.allBodies(engine.world);
 
         for (var i = 0; i < bodies.length; i++) {
@@ -117,6 +123,8 @@ Example.events = function() {
             if (!body.isStatic && body.position.y >= 500) {
                 // scale force for mass and time applied
                 var forceMagnitude = (0.03 * body.mass) * timeScale;
+                
+                console.log(forceMagnitude, body.mass, timeScale);
 
                 // apply the force over a single update
                 Body.applyForce(body, body.position, { 
@@ -145,27 +153,27 @@ Example.events = function() {
     render.mouse = mouse;
 
     // an example of using mouse events on a mouse
-    Events.on(mouseConstraint, 'mousedown', function(event) {
-        var mousePosition = event.mouse.position;
-        console.log('mousedown at ' + mousePosition.x + ' ' + mousePosition.y);
-        shakeScene(engine);
-    });
+    // Events.on(mouseConstraint, 'mousedown', function(event) {
+    //     var mousePosition = event.mouse.position;
+    //     console.log('mousedown at ' + mousePosition.x + ' ' + mousePosition.y);
+    //     shakeScene(engine);
+    // });
 
-    // an example of using mouse events on a mouse
-    Events.on(mouseConstraint, 'mouseup', function(event) {
-        var mousePosition = event.mouse.position;
-        console.log('mouseup at ' + mousePosition.x + ' ' + mousePosition.y);
-    });
+    // // an example of using mouse events on a mouse
+    // Events.on(mouseConstraint, 'mouseup', function(event) {
+    //     var mousePosition = event.mouse.position;
+    //     console.log('mouseup at ' + mousePosition.x + ' ' + mousePosition.y);
+    // });
 
-    // an example of using mouse events on a mouse
-    Events.on(mouseConstraint, 'startdrag', function(event) {
-        console.log('startdrag', event);
-    });
+    // // an example of using mouse events on a mouse
+    // Events.on(mouseConstraint, 'startdrag', function(event) {
+    //     console.log('startdrag', event);
+    // });
 
-    // an example of using mouse events on a mouse
-    Events.on(mouseConstraint, 'enddrag', function(event) {
-        console.log('enddrag', event);
-    });
+    // // an example of using mouse events on a mouse
+    // Events.on(mouseConstraint, 'enddrag', function(event) {
+    //     console.log('enddrag', event);
+    // });
 
     // fit the render viewport to the scene
     Render.lookAt(render, {

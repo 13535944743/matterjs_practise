@@ -39,7 +39,7 @@ Example.constraints = function() {
     var constraint = Constraint.create({
         pointA: { x: 150, y: 100 },
         bodyB: body,
-        pointB: { x: -10, y: -10 }
+        pointB: { x: 0, y: 0 }
     });
 
     Composite.add(world, [body, constraint]);
@@ -50,7 +50,7 @@ Example.constraints = function() {
     var constraint = Constraint.create({
         pointA: { x: 280, y: 120 },
         bodyB: body,
-        pointB: { x: -10, y: -7 },
+        pointB: { x: 0, y: 0 },
         stiffness: 0.001
     });
 

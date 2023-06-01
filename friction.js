@@ -39,6 +39,7 @@ Example.friction = function() {
         Bodies.rectangle(0, 300, 50, 600, { isStatic: true })
     ]);
 
+    // ![](https://www.clzczh.top/CLZ_img/images/202306011948044.png)
     Composite.add(world, [
         Bodies.rectangle(300, 180, 700, 20, { isStatic: true, angle: Math.PI * 0.06, render: { fillStyle: '#060a19' } }),
         Bodies.rectangle(300, 70, 40, 40, { friction: 0.001 })

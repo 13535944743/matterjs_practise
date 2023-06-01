@@ -92,7 +92,7 @@ Example.doublePendulum = function() {
         });
 
         Render.startViewTransform(render);
-        render.context.globalAlpha = 0.7;
+        // render.context.globalAlpha = 0.7;
 
         for (var i = 0; i < trail.length; i += 1) {
             var point = trail[i].position,
@@ -103,8 +103,8 @@ Example.doublePendulum = function() {
             render.context.fillRect(point.x, point.y, 2, 2);
         }
 
-        render.context.globalAlpha = 1;
-        Render.endViewTransform(render);
+        // render.context.globalAlpha = 1;
+        // Render.endViewTransform(render);
 
         if (trail.length > 2000) {
             trail.pop();
